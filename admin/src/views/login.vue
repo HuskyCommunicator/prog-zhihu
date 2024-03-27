@@ -18,26 +18,6 @@ const rules = ref({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 //表单 登录
-// const submitForm = async () => {
-//   const { username, password } = loginForm.value
-//   ruleFormRef.value.validate(async (valid) => {
-//     if (valid) {
-//       try {
-//         const res = await loginAPI({ username, password })
-//         if (res.status === 200) {
-//           console.log(res.data)
-//           userStore.userInfo = res.data
-//           //router.push('/home')
-//         } else {
-//           ElMessage.error(res.data.msg)
-//         }
-//       } catch (err) {
-//         console.error(err)
-//       }
-//     }
-//   })
-// }
-//
 const submitForm = async () => {
   const { username, password } = loginForm.value
   ruleFormRef.value.validate(async (valid) => {

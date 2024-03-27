@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { userGetAPI } from '@/apis/user'
 import { loginAPI } from '@/apis/login'
 
 export const useUserStore = defineStore(
@@ -9,7 +8,7 @@ export const useUserStore = defineStore(
     //用户信息
     const userInfo = ref([])
     //路由配置状态
-    const isGetterRouter = false
+    const isGetterRouter = ref(false)
     //获取用户信息
     const getUserInfo = async ({ username, password }) => {
       const res = await loginAPI({ username, password })
@@ -22,7 +21,7 @@ export const useUserStore = defineStore(
     }
     //控制路由配置
     const changeGetterRouter = (value) => {
-      isGetterRouter = value
+      isGetterRouter.value = value
     }
     return {
       userInfo,

@@ -1,9 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
-const route = useRoute
-const router = useRouter()
+const route = useRoute()
 </script>
 <template>
   <el-menu
