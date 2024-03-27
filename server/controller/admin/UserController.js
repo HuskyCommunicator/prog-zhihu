@@ -1,5 +1,6 @@
 const UserService = require("../../service/admin/UserService");
 const sendResponse = require("../../utils/sendResponse");
+const JWT = require("../../utils/JWT");
 const UserController = {
   // add 函数处理用户注册请求
   add: async (req, res) => {
