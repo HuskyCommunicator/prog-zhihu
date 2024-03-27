@@ -8,7 +8,9 @@ const ruleFormRef = ref()
 const userForm = ref({
   username: '11',
   password: '11',
-  role: 1
+  role: 1,
+  avatar: '', // 头像URL
+  file: null // 上传的文件
 })
 //表单验证
 const rules = ref({
@@ -32,6 +34,13 @@ const rules = ref({
       message: '请选择权限',
       trigger: 'blur'
     }
+  ],
+  avatar: [
+    {
+      required: true,
+      message: '请选择头像',
+      trigger: 'blur'
+    }
   ]
 })
 // 用户规则设置
@@ -50,15 +59,11 @@ const userAdd = async () => {
   const { username, password, role } = userForm.value
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      try {
-        const res = await userAddAPI({ username, password, role })
-        if (res.data.code === 200) {
-          router.push('/user/userlist')
-        } else {
-          ElMessage.error(res.data.msg)
-        }
-      } catch (err) {
-        console.error(err)
+      const res = await userAddAPI({ username, password, role })
+      if (res.data.code === 200) {
+        router.push('/user/userlist')
+      } else {
+        ElMessage.error(res.data.msg)
       }
     }
   })
@@ -75,12 +80,15 @@ const userAdd = async () => {
       class="demo-ruleForm"
       status-icon
     >
+      <!-- 用户名 -->
       <el-form-item label="用户名" prop="username">
         <el-input v-model="userForm.username" />
       </el-form-item>
+      <!-- 密码 -->
       <el-form-item label="密码" prop="password">
         <el-input v-model="userForm.password" />
       </el-form-item>
+      <!-- 权限 -->
       <el-form-item label="权限" prop="role">
         <el-select v-model="userForm.role" placeholder="Select" size="large" style="width: 240px">
           <el-option
@@ -91,6 +99,7 @@ const userAdd = async () => {
           />
         </el-select>
       </el-form-item>
+      <!-- 头像 -->
       <!-- 提交 -->
       <el-form-item>
         <el-button type="primary" @click="userAdd()">添加用户</el-button>

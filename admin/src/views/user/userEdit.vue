@@ -60,15 +60,11 @@ const putUser = async () => {
   const { username, password, role, _id } = userForm.value
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      try {
-        const res = await userPutAPI({ username, password, role, _id })
-        if (res.status === 200) {
-          router.push('/user/userlist')
-        } else {
-          ElMessage.error(res.data.msg)
-        }
-      } catch (err) {
-        console.error(err)
+      const res = await userPutAPI({ username, password, role, _id })
+      if (res.status === 200) {
+        router.push('/user/userlist')
+      } else {
+        ElMessage.error(res.data)
       }
     }
   })

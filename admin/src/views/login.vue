@@ -9,7 +9,7 @@ const ruleFormRef = ref()
 
 //表单内容
 const loginForm = ref({
-  username: '11',
+  username: '111',
   password: '11'
 })
 //表单规则
@@ -22,17 +22,12 @@ const submitForm = async () => {
   const { username, password } = loginForm.value
   ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      try {
-        const res = await loginAPI({ username, password })
-        if (res.status === 200) {
-          userStore.userInfo = res.data.data
-          router.push('/home')
-        } else {
-          ElMessage.error(res.data.msg)
-        }
-      } catch (err) {
-        console.error(err)
-        ElMessage.error(err)
+      const res = await loginAPI({ username, password })
+      if (res.status === 200) {
+        userStore.userInfo = res.data.data
+        router.push('/home')
+      } else {
+        ElMessage.error(res.data.msg)
       }
     }
   })
