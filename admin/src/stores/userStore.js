@@ -18,6 +18,7 @@ export const useUserStore = defineStore(
     const clearUserInfo = () => {
       userInfo.value = {}
       localStorage.removeItem('user')
+      localStorage.removeItem('token')
     }
     //控制路由配置
     const changeGetterRouter = (value) => {
@@ -32,6 +33,6 @@ export const useUserStore = defineStore(
     }
   },
   {
-    persist: { key: 'user', paths: ['userInfo'] }
+    persist: { paths: ['userInfo'] }
   }
 )

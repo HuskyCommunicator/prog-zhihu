@@ -34,7 +34,7 @@ const configRouter = () => {
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
   // 检查用户是否已登录
-  const isLogin = localStorage.getItem('user')
+  const isLogin = localStorage.getItem('token')
   // 检查路由是否已配置
   const isRouterConfigured = userStore.isGetterRouter
   //  console.log('是否登录', isLogin, `/n`, '是否配置路由', isRouterConfigured)

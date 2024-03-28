@@ -21,7 +21,14 @@ const UserController = {
       return sendResponse(res, 400, "用户名密码不匹配");
     }
     const user = await UserService.getUser({ username });
-    console.log(user);
+    const token = JWT.generate(
+      {
+        _id: user._id.toString(),
+        username: user.username,
+      },
+      "1m"
+    );
+    res.header("Authorization", token);
     return sendResponse(res, 200, "登陆成功", user);
   },
 
