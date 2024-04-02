@@ -1,0 +1,10 @@
+npm init vue@latest 
+创建新vue项目
+//
+express
+创建express项目
+//eslint.cjs
+  rules: {
+    'vue/multi-word-component-names': 'off,'
+  }
+eslint关闭文件名检查功能
