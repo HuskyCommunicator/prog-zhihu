@@ -1,7 +1,8 @@
 <script setup>
 import { Delete, Edit, Star } from '@element-plus/icons-vue'
-import { NewListGetAPI } from '@/apis/new'
+import { NewListGetAPI, NewDelAPI } from '@/apis/new'
 import { ref, onMounted } from 'vue'
+import { ElMessage } from 'element-plus'
 const newList = ref([])
 const getNewList = async () => {
   const res = await NewListGetAPI()
@@ -18,8 +19,10 @@ const updateNew = () => {
 }
 
 //删除新闻
-const deleteNew = () => {
-  console.log('删除')
+const deleteNew = async (row) => {
+  const res = await NewDelAPI(row.title)
+  getNewList()
+  ElMessage.success('删除成功')
 }
 //预览新闻
 const previewNew = () => {

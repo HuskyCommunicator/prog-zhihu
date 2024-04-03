@@ -6,7 +6,19 @@ const NewController = require("../../controller/admin/NewController");
 const multer = require("multer");
 const upload = multer({ dest: "public/newUploads/" });
 //添加新闻
-NewRouter.post("/adminapi/new/add", NewController.add);
+NewRouter.post(
+  "/adminapi/new/add",
+  upload.single("file"),
+  NewController.addNew
+);
 //获取新闻列表
 NewRouter.get("/adminapi/new/getList", NewController.getNewList);
+//更新新闻
+NewRouter.put(
+  "/adminapi/new/update",
+  upload.single("file"),
+  NewController.updateNew
+);
+//删除新闻
+NewRouter.delete("/adminapi/new/del", NewController.delNew);
 module.exports = NewRouter;
