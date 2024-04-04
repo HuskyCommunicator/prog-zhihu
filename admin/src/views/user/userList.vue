@@ -46,18 +46,22 @@ const avatarUrl = computed(() => {
           </div>
         </template>
       </el-table-column>
+      <!-- 账号 -->
       <el-table-column prop="username" label="账号" />
+      <!-- 权限 -->
       <el-table-column prop="role" label="权限">
         <template #default="{ row }">
           {{ row.role === 1 ? '管理员' : '编辑员' }}
         </template>
       </el-table-column>
+      <!-- 操作 -->
       <el-table-column label="操作">
         <template #default="{ row }">
           <el-button type="primary" :icon="Edit" circle @click="updateUser(row)" />
           <el-button type="danger" :icon="Delete" circle @click="deleteUser(row)" />
         </template>
       </el-table-column>
+      <!--  -->
     </el-table>
   </div>
 </template>

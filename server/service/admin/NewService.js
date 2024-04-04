@@ -26,10 +26,18 @@ const NewService = {
   },
 
   //更新新闻
-  updatedNew: async ({ _id, title, content, category, isPublish, author }) => {
+  updatedNew: async ({
+    _id,
+    cover,
+    title,
+    content,
+    category,
+    isPublish,
+    author,
+  }) => {
     return NewModel.updateOne(
       { _id },
-      { title, content, category, isPublish, author }
+      { title, content, category, cover, isPublish, author }
     );
   },
   //删除新闻

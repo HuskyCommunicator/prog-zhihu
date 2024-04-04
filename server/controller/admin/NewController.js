@@ -34,10 +34,19 @@ const NewController = {
   updateNew: async (req, res) => {
     const { _id, title, content, category, isPublish, author } = req.body;
     const news = await NewService.getNew({ _id });
+    const cover = req.file ? `/newUploads/${req.file.filename}` : "";
     if (!news) {
       return sendResponse(res, 400, "更新失败 新闻不存在");
     }
-    NewService.updatedNew({ _id, title, content, category, isPublish, author });
+    NewService.updatedNew({
+      _id,
+      cover,
+      title,
+      content,
+      category,
+      isPublish,
+      author,
+    });
     return sendResponse(res, 200, "更新成功");
     return 1;
   },

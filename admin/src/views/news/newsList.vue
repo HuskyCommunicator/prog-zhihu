@@ -36,6 +36,20 @@ const previewNew = () => {
     <el-table :data="newList" style="width: 100%">
       <!-- 标题 -->
       <el-table-column prop="title" label="标题" width="180" />
+      <!-- 封面 -->
+      <el-table-column label="封面">
+        <template #default="scope">
+          <div v-if="scope.row.cover">
+            <el-avatar :size="50" :src="'http://localhost:3010' + scope.row.cover" />
+          </div>
+          <div v-else>
+            <el-avatar
+              :size="50"
+              src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+            />
+          </div>
+        </template>
+      </el-table-column>
       <!-- 分类 -->
       <el-table-column prop="category" label="分类" width="180" />
       <!-- 发布状态 -->
@@ -57,6 +71,7 @@ const previewNew = () => {
           <el-button type="danger" :icon="Delete" circle @click="deleteNew(row)" />
         </template>
       </el-table-column>
+      <!--  -->
     </el-table>
   </el-card>
 </template>
