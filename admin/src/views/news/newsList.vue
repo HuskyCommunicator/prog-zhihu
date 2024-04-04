@@ -5,9 +5,16 @@ import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 const newList = ref([])
+const dialogVisible = ref(false)
+const previewData = ref({})
 const getNewList = async () => {
   const res = await NewListGetAPI()
   newList.value = res.data.data
+}
+//预览新闻按钮
+const previewNew = (data) => {
+  previewData.value = data
+  dialogVisible.value = true
 }
 onMounted(() => getNewList())
 //发布状态-开关变化函数
@@ -24,10 +31,6 @@ const deleteNew = async (row) => {
   const res = await NewDelAPI(row.title)
   getNewList()
   ElMessage.success('删除成功')
-}
-//预览新闻
-const previewNew = () => {
-  console.log('预览')
 }
 </script>
 <template>
@@ -74,4 +77,19 @@ const previewNew = () => {
       <!--  -->
     </el-table>
   </el-card>
+  <!-- 预览新闻 -->
+  <el-dialog v-model="dialogVisible" title="预览新闻" width="50%">
+    <div>
+      <h2>标题:{{ previewData.title }}</h2>
+      <h4>作者:{{ previewData.author }}</h4>
+      <!-- <div style="font-size: 12px; color: gray">
+        {{ formatTime.getTime(previewData.editTime) }}
+      </div> -->
+      <el-divider>
+        <el-icon><star-filled /></el-icon>
+      </el-divider>
+      <div v-html="previewData.content" class="htmlContent"></div>
+    </div>
+  </el-dialog>
 </template>
+<style lang="scss"></style>

@@ -23,7 +23,6 @@ const NewController = {
   },
   //获取新闻
   getNew: async (req, res) => {
-    console.log(req.params.id);
     const news = await NewService.getNew({ _id: req.params.id });
     if (!news) {
       return sendResponse(res, 400, "获取失败 新闻不存在");
