@@ -17,13 +17,20 @@ const NewService = {
     return NewModel.find({});
   },
   //获取新闻
-  getNew: async ({ title }) => {
-    return NewModel.findOne({ title });
+  getNew: async ({ title, _id }) => {
+    if (title) {
+      return NewModel.findOne({ title });
+    } else if (_id) {
+      return NewModel.findOne({ _id });
+    }
   },
 
   //更新新闻
-  updatedNew: async () => {
-    return 1;
+  updatedNew: async ({ _id, title, content, category, isPublish, author }) => {
+    return NewModel.updateOne(
+      { _id },
+      { title, content, category, isPublish, author }
+    );
   },
   //删除新闻
   delNew: async ({ title }) => {

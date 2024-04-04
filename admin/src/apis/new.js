@@ -22,7 +22,30 @@ export const NewListGetAPI = () => {
     return error.response
   })
 }
+//获取新闻
+export const NewGetAPI = (id) => {
+  return request({
+    url: `adminapi/new/get/${id}`,
+    method: 'GET',
+    data: { id }
+  }).catch((error) => {
+    return error.response
+  })
+}
 //更新新闻
+export const NewPutAPI = ({ newsForm }) => {
+  const params = new FormData()
+  for (let i in newsForm) {
+    params.append(i, newsForm[i])
+  }
+  return request({
+    url: 'adminapi/new/update',
+    method: 'PUT',
+    data: params
+  }).catch((error) => {
+    return error.response
+  })
+}
 //删除新闻
 export const NewDelAPI = (title) => {
   return request({

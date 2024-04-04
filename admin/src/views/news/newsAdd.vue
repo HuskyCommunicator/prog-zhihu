@@ -69,50 +69,52 @@ const submitForm = () => {
 </script>
 
 <template>
-  <!-- 页面头部 -->
-  <el-page-header content="创建新闻" icon="" title="新闻管理" />
-  <!-- 表单开始 -->
-  <el-form
-    ref="newsFormRef"
-    :model="newsForm"
-    :rules="newsFormRules"
-    label-width="120px"
-    class="demo-ruleForm"
-    status-icon
-  >
-    <!-- 标题输入框 -->
-    <el-form-item label="标题" prop="title">
-      <el-input v-model="newsForm.title" />
-    </el-form-item>
-    <!-- 作者 -->
-    <el-form-item label="作者" prop="author">
-      {{ newsForm.author }}
-    </el-form-item>
-    <!-- 内容编辑器 -->
-    <el-form-item label="内容" prop="content">
-      <Editor @event="editorChange" />
-    </el-form-item>
-    <!-- 类别选择器 -->
-    <el-form-item label="类别" prop="category">
-      <el-select v-model="newsForm.category" class="m-2" placeholder="Select" style="width: 100%">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-    </el-form-item>
-    <!-- 封面上传组件 -->
-    <el-form-item label="封面" prop="cover">
-      <Upload :avatar="newsForm.cover" @avatarChange="handleChange" />
-    </el-form-item>
-    <!-- 提交按钮 -->
-    <el-form-item>
-      <el-button type="primary" @click="submitForm()">添加新闻</el-button>
-    </el-form-item>
-  </el-form>
-  <!-- 表单结束 -->
+  <el-card>
+    <!-- 页面头部 -->
+    <el-page-header content="创建新闻" icon="" title="新闻管理" />
+    <!-- 表单开始 -->
+    <el-form
+      ref="newsFormRef"
+      :model="newsForm"
+      :rules="newsFormRules"
+      label-width="120px"
+      class="demo-ruleForm"
+      status-icon
+    >
+      <!-- 标题输入框 -->
+      <el-form-item label="标题" prop="title">
+        <el-input v-model="newsForm.title" />
+      </el-form-item>
+      <!-- 作者 -->
+      <el-form-item label="作者" prop="author">
+        {{ newsForm.author }}
+      </el-form-item>
+      <!-- 内容编辑器 -->
+      <el-form-item label="内容" prop="content">
+        <Editor @event="editorChange" />
+      </el-form-item>
+      <!-- 类别选择器 -->
+      <el-form-item label="类别" prop="category">
+        <el-select v-model="newsForm.category" class="m-2" placeholder="Select" style="width: 100%">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
+      <!-- 封面上传组件 -->
+      <el-form-item label="封面" prop="cover">
+        <Upload :avatar="newsForm.cover" @avatarChange="handleChange" />
+      </el-form-item>
+      <!-- 提交按钮 -->
+      <el-form-item>
+        <el-button type="primary" @click="submitForm()">添加新闻</el-button>
+      </el-form-item>
+    </el-form>
+    <!-- 表单结束 -->
+  </el-card>
 </template>
 <style lang="scss" scoped>
 :deep(.avatar-uploader .el-upload) {

@@ -3,6 +3,7 @@ import { Delete, Edit, Star } from '@element-plus/icons-vue'
 import { NewListGetAPI, NewDelAPI } from '@/apis/new'
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
+import router from '@/router'
 const newList = ref([])
 const getNewList = async () => {
   const res = await NewListGetAPI()
@@ -14,8 +15,8 @@ const handleSwitchChange = async (item) => {
   console.log('开关改变了', item.isPublish === 0 ? '未发布' : '已发布')
 }
 //修改新闻
-const updateNew = () => {
-  console.log('更新')
+const updateNew = (row) => {
+  router.push(`/news/newsedit/${row._id}`)
 }
 
 //删除新闻
