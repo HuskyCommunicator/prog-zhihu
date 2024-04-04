@@ -24,6 +24,7 @@ const newsForm = reactive({
 const getNew = async () => {
   const res = await NewGetAPI(route.params.id)
   Object.assign(newsForm, res.data.data)
+  console.log(newsForm)
 }
 onMounted(() => getNew())
 // 类别选择选项
@@ -96,7 +97,7 @@ const submitForm = () => {
       </el-form-item>
       <!-- 内容编辑器 -->
       <el-form-item label="内容" prop="content">
-        <Editor @event="editorChange" />
+        <Editor @event="editorChange" :content="newsForm.content" v-if="newsForm.content" />
       </el-form-item>
       <!-- 类别选择器 -->
       <el-form-item label="类别" prop="category">

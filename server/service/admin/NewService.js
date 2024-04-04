@@ -35,10 +35,17 @@ const NewService = {
     isPublish,
     author,
   }) => {
-    return NewModel.updateOne(
-      { _id },
-      { title, content, category, cover, isPublish, author }
-    );
+    if (cover) {
+      return NewModel.updateOne(
+        { _id },
+        { title, content, category, cover, isPublish, author }
+      );
+    } else {
+      return NewModel.updateOne(
+        { _id },
+        { title, content, category, isPublish, author }
+      );
+    }
   },
   //删除新闻
   delNew: async ({ title }) => {

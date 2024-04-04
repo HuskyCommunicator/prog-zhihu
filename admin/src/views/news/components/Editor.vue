@@ -15,7 +15,7 @@ const emit = defineEmits(['event'])
 const editorRef = shallowRef()
 
 // 内容 HTML
-const valueHtml = ref('<p>hello</p>')
+const valueHtml = ref('')
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
@@ -27,8 +27,7 @@ onBeforeUnmount(() => {
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
   //设置初始值
-  props.content && editor.setHtml(props.content)
-  //
+  valueHtml.value = props.content ? props.content : '<p>hello</p>'
 }
 
 const handleChange = () => {
