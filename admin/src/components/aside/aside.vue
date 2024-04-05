@@ -38,7 +38,7 @@ const vAdmin = {
       <el-menu-item index="/user/useradd">添加用户</el-menu-item>
     </el-sub-menu>
     <!-- 新闻页 -->
-    <el-sub-menu index="/news" v-admin>
+    <el-sub-menu index="/news">
       <template #title>
         <el-icon><UserFilled /></el-icon>
         <span>新闻管理</span>

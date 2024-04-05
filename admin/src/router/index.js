@@ -40,6 +40,7 @@ const configRouter = () => {
   router.addRoute(mainBoxRoute)
   // 更改路由配置状态
   userStore.changeGetterRouter(true)
+  console.log(mainBoxRoute.children)
 }
 
 // 添加路由拦截器，在每次路由跳转前都会运行

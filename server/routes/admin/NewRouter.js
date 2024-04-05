@@ -7,7 +7,7 @@ const multer = require("multer");
 const upload = multer({ dest: "public/newUploads/" });
 //引入token验证
 const { tokenVerify, roleVerify } = require("../../utils/tokenVerify");
-NewRouter.use(tokenVerify);
+// NewRouter.use(tokenVerify);
 //添加新闻
 NewRouter.post(
   "/adminapi/new/add",

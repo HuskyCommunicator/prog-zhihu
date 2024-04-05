@@ -1,4 +1,5 @@
 <script setup>
+// 导入所需的模块和服务
 import { ref, reactive, onMounted } from 'vue'
 import Editor from './components/Editor.vue'
 import Upload from '@/components/upload/upload.vue'
@@ -6,10 +7,14 @@ import { NewPutAPI, NewGetAPI } from '@/apis/new'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { useRoute } from 'vue-router'
+
+// 初始化路由和路由参数
 const router = useRouter()
 const route = useRoute()
+
 // 创建一个 ref 对象来引用表单
 const newsFormRef = ref()
+
 // 创建一个响应式对象来存储表单数据
 const newsForm = reactive({
   title: '', // 标题
@@ -20,13 +25,16 @@ const newsForm = reactive({
   isPublish: 0, // 发布状态：0未发布 1已发布
   author: '' //作者
 })
+
 //获取新闻数据
 const getNew = async () => {
   const res = await NewGetAPI(route.params.id)
-  Object.assign(newsForm, res.data.data)
-  console.log(newsForm)
+  Object.assign(newsForm, res.data.data) // 将获取的新闻数据赋值给 newsForm
 }
+
+// 组件挂载后获取新闻数据
 onMounted(() => getNew())
+
 // 类别选择选项
 const options = [
   {
@@ -50,24 +58,27 @@ const newsFormRules = reactive({
   category: [{ required: true, message: '请选择分类', trigger: 'blur' }],
   cover: [{ required: true, message: '请选择图片', trigger: 'blur' }]
 })
+
 // 当文件被选择后，更新 newsForm 的 cover 和 file 属性
 const handleChange = (file) => {
   newsForm.cover = URL.createObjectURL(file) // 更新封面图片
   newsForm.file = file // 更新文件
 }
+
 // editor 内容改变时的回调函数
 const editorChange = (data) => {
   newsForm.content = data // 更新内容
 }
+
 // 提交表单方法
 const submitForm = () => {
   // 验证表单
   newsFormRef.value.validate(async (valid) => {
     if (valid) {
-      const res = await NewPutAPI({ newsForm })
+      const res = await NewPutAPI({ newsForm }) // 提交表单
       if (res.status === 200) {
-        ElMessage.success('更新成功')
-        router.push('/news/newslist')
+        ElMessage.success('更新成功') // 显示成功消息
+        router.push('/news/newslist') // 跳转到新闻列表页面
       }
     }
   })
@@ -122,6 +133,7 @@ const submitForm = () => {
     <!-- 表单结束 -->
   </el-card>
 </template>
+
 <style lang="scss" scoped>
 :deep(.avatar-uploader .el-upload) {
   border: 1px dashed var(--el-border-color);

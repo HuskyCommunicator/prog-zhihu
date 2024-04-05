@@ -20,7 +20,7 @@ export const useUserStore = defineStore(
         ...userInfo.value,
         avatar: data.avatar || userInfo.value.avatar,
         username: data.username,
-        password: data.password,
+        // password: data.password,
         role: data.role
       }
     }
