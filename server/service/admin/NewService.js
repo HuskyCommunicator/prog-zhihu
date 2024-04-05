@@ -2,7 +2,15 @@ const NewModel = require("../../models/admin/NewModel");
 
 const NewService = {
   //添加新闻
-  addNew: async ({ title, author, content, category, cover, isPublish }) => {
+  addNew: async ({
+    title,
+    author,
+    content,
+    category,
+    cover,
+    isPublish,
+    editTime,
+  }) => {
     return NewModel.create({
       title,
       author,
@@ -10,6 +18,7 @@ const NewService = {
       category,
       cover,
       isPublish,
+      editTime,
     });
   },
   //获取新闻列表
@@ -34,16 +43,17 @@ const NewService = {
     category,
     isPublish,
     author,
+    editTime,
   }) => {
     if (cover) {
       return NewModel.updateOne(
         { _id },
-        { title, content, category, cover, isPublish, author }
+        { title, content, category, cover, isPublish, author, editTime }
       );
     } else {
       return NewModel.updateOne(
         { _id },
-        { title, content, category, isPublish, author }
+        { title, content, category, isPublish, author, editTime }
       );
     }
   },

@@ -5,7 +5,7 @@ import { NewListGetAPI, NewDelAPI } from '@/apis/new'
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
-
+import getEditTime from '@/utils/time.js'
 // 定义响应式数据
 const newList = ref([]) // 新闻列表
 const dialogVisible = ref(false) // 预览新闻对话框的可见性
@@ -82,6 +82,13 @@ const deleteNew = async (row) => {
           />
         </template>
       </el-table-column>
+      <!-- 编辑时间 -->
+      <el-table-column label="编辑时间" width="180">
+        <template #default="scope">
+          <!-- 发布状态开关 -->
+          {{ getEditTime(scope.row.editTime) }}
+        </template>
+      </el-table-column>
       <!-- 操作列 -->
       <el-table-column label="操作">
         <template #default="{ row }">
@@ -99,6 +106,7 @@ const deleteNew = async (row) => {
       <!-- 新闻标题和作者 -->
       <h2>标题:{{ previewData.title }}</h2>
       <h4>作者:{{ previewData.author }}</h4>
+      <h5>编辑时间:{{ getEditTime(previewData.editTime) }}</h5>
       <!-- 新闻内容 -->
       <el-divider>
         <el-icon><star-filled /></el-icon>

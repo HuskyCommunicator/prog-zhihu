@@ -1,7 +1,6 @@
 // 引入所需的模块和服务
 const NewService = require("../../service/admin/NewService");
 const sendResponse = require("../../utils/sendResponse");
-
 // 定义 NewController 对象
 const NewController = {
   // 添加新闻
@@ -17,7 +16,15 @@ const NewController = {
       return sendResponse(res, 400, "添加失败 标题名称重复");
     }
     // 添加新闻
-    NewService.addNew({ title, content, category, isPublish, author, cover });
+    NewService.addNew({
+      title,
+      content,
+      category,
+      isPublish,
+      author,
+      cover,
+      editTime: new Date(),
+    });
     // 返回成功信息
     return sendResponse(res, 200, "添加成功");
   },
@@ -60,6 +67,7 @@ const NewController = {
       category,
       isPublish,
       author,
+      editTime: new Date(),
     });
     // 返回成功信息
     return sendResponse(res, 200, "更新成功");
